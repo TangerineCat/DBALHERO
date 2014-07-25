@@ -25,7 +25,6 @@ struct item
 {
     int price;
     std::string name;
-
 };
 
 
