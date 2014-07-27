@@ -1,9 +1,0 @@
-README
-
-knapsack algorithm
-Version Alpha 1.0
-
-Currently weight is equal to value.
-
-knapsack is the main algorithm library. Coin is an example implementation of
-the knapsack algorithm.

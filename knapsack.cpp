@@ -2,9 +2,7 @@
 #include <iostream>
 #include "knapsack.h"
 
-#define maxcount 10
-
-using namespace std;
+// #define maxcount 10
 
 // ******* DATA STRUCTURES ***********
 
@@ -15,7 +13,7 @@ using namespace std;
 // ******* Class Functions ****************
 
 // Constructor given problem statement. This formalizes the problem statement
-KnapSack_DP::KnapSack_DP(int capacity, vector<item> cat) : 
+KnapSack_DP::KnapSack_DP(int capacity, std::vector<item> cat) : 
     capacity(capacity), 
     cat(cat)
 {
@@ -45,16 +43,18 @@ m_elem KnapSack_DP::solve()
     }
     // Initialize base step
     int w;                      // step
-    vector<item> sol_0;
-    m_elem m_0 = {0, 0, sol_0}; // initialize base case
+    std::vector<item> sol_0;
+    m_elem m_0 = {0, 0, 0, sol_0}; // initialize base case
     
-    // No item case
-    if (cat.size() == 0)
+    // No item case and not enough money case
+    if (cat.size() == 0 || cat[0].price > this->capacity)
     {
+        std::cout << "Can't buy anything with " << this->capacity << " cents and "
+            << cat.size() << " items" << std::endl;
         m_0.weight = capacity;
         return m_0;
     }
-    
+
     // All weights smaller than the first weight will have a maximum of 0.
     for (w = 0; w < cat[0].price; w++)
     {

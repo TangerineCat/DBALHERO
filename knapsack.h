@@ -24,6 +24,7 @@
 struct item
 {
     int price;
+    int value;
     std::string name;
 };
 
@@ -32,6 +33,7 @@ struct item
 struct m_elem
 {
     int opt_weight;         // maximum weight up to here
+    int opt_value;
     int weight;             // Weight cap of problem
     std::vector<item> items; // vector of selected objects
 };

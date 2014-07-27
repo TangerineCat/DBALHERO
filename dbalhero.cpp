@@ -3,7 +3,8 @@
  */
 
 #include "dbalhero.h"
-
+#include "knapsack.h"
+ 
 void usage()
 {
     std::cerr << "usage: ./dbalhero [amount USD in cents]" << std::endl;
@@ -37,19 +38,23 @@ void readinCSV(std::vector<item>& list, std::string filename)
         std::cerr << "Unable to open file" << std::endl;
         return;
     }
+    line = getLineAndSplit(catstream);
 
     while(catstream.good())
     {
         item newitem = {}; 
         line = getLineAndSplit(catstream);
-
+        if(line.size()<2)
+            break;
         newitem.name = line[0];
+        //std::cout << newitem.name << std::endl;
 
         std::stringstream lineStream(line[1]);
         std::getline(lineStream, temp, '.');
         newitem.price = stoi(temp) * 100;
         std::getline(lineStream, temp);
         newitem.price += stoi(temp);
+
         /*)
         newitem.taxp = stoi(line[2]);
 
@@ -64,6 +69,8 @@ void readinCSV(std::vector<item>& list, std::string filename)
         list.push_back(newitem);
 
     }
+
+    std::cout<< "read done" << std::endl;
 }
 
 int main(int argc, char** argv) 
@@ -94,6 +101,9 @@ int main(int argc, char** argv)
     {
         std::cout << ans.items[i].name << ", " << std::endl;
     } 
+
+    std::cout << ans.opt_weight << " out of " 
+        << ans.weight << " spent" << std::endl;
 
 
     //    cin >> budget;
